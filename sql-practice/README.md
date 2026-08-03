@@ -2,6 +2,8 @@
 
 SQLite を使った SQL 練習用リポジトリです。
 
+Windowsでsqlite3未導入の状態から使い始める場合は [WINDOWS_SETUP.md](./WINDOWS_SETUP.md) を参照してください。
+
 ## セットアップ
 
 ```bash
