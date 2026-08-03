@@ -25,6 +25,30 @@ cd sql-practice
 
 各問について「正解」「不正解」「未回答」を表示します。不正解の場合は自分のクエリの実行結果と期待される結果（データ）の差分を表示しますが、模範解答のSQL文自体は表示しません。
 
+## 自由に試す（インタラクティブモード）
+
+`answers/dayXX.sql` に書く前に、SQLを気軽に試したいときは `sqlite3` の対話モードが使えます。
+
+```bash
+sqlite3 practice.db
+```
+
+`sqlite>` というプロンプトになるので、SQLを直接打って実行できます。
+
+```sql
+sqlite> .headers on
+sqlite> .mode column
+sqlite> SELECT * FROM customers;
+```
+
+主なコマンド:
+
+- `.tables` : テーブル一覧を表示
+- `.schema customers` : テーブルの構造を表示
+- `.quit` : 対話モードを終了
+
+ここで試した内容は `answers/dayXX.sql` には反映されません。良さそうなクエリができたら、`answers/dayXX.sql` にコピーして保存してください。
+
 ## ディレクトリ構成
 
 - `schema.sql` / `seed.sql`: テーブル定義とサンプルデータ
