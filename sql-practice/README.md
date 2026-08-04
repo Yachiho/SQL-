@@ -4,7 +4,23 @@ SQLite を使った SQL 練習用リポジトリです。
 
 Windowsでsqlite3未導入の状態から使い始める場合は [WINDOWS_SETUP.md](./WINDOWS_SETUP.md) を参照してください。
 
-## セットアップ
+## Windows: ダブルクリックで使う（アプリ版）
+
+コマンドを毎回打ちたくない場合は、`sql-practice.bat` をダブルクリックしてください。
+メニューが表示され、番号を選ぶだけで「環境構築」「採点」「SQLを自由に試す」ができます
+（`sqlite3` のインストールと WINDOWS_SETUP.md の手順3までは事前に済ませておく必要があります）。
+
+```
+1. 環境構築（practice.db を作成）
+2. 採点する
+3. SQLを自由に試す（対話モード）
+4. 終了
+```
+
+デスクトップにショートカットを作って（`sql-practice.bat` を右クリック→「ショートカットの作成」）
+デスクトップに置いておくと、次回からはそのショートカットをダブルクリックするだけで使えます。
+
+## セットアップ（コマンドで実行する場合）
 
 ```bash
 cd sql-practice
@@ -57,3 +73,6 @@ sqlite> SELECT * FROM customers;
 - `answers/dayXX.sql`: 自分の解答を書く場所
 - `solutions/dayXX.sql`: 模範解答（答え合わせ用、`check.sh` が内部的に使用）
 - `check.sh`: 採点スクリプト（`./check.sh <DAY番号>`）
+- `sql-practice.bat`: Windows用メニューアプリ（ダブルクリックで起動）
+- `setup.bat` / `check.bat` / `practice.bat`: `sql-practice.bat` から呼ばれる個別のWindows用ランチャー
+- `_find_bash.bat`: Git Bashの場所を自動検出する内部ファイル（直接実行しない）
