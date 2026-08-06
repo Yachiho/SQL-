@@ -4,6 +4,8 @@ SQLite を使った SQL 練習用リポジトリです。
 
 Windowsでsqlite3未導入の状態から使い始める場合は [WINDOWS_SETUP.md](./WINDOWS_SETUP.md) を参照してください。
 
+SQLiteに慣れた上で次はOracleを学びたい場合は [oracle/](./oracle/) を参照してください。同じEC題材をOracle構文で用意し、SQLiteとの違いを手を動かして確認できます。
+
 ## Windows: ダブルクリックで使う（アプリ版）
 
 コマンドを毎回打ちたくない場合は、`sql-practice.bat` をダブルクリックしてください。
@@ -76,3 +78,4 @@ sqlite> SELECT * FROM customers;
 - `sql-practice.bat`: Windows用メニューアプリ（ダブルクリックで起動）
 - `setup.bat` / `check.bat` / `practice.bat`: `sql-practice.bat` から呼ばれる個別のWindows用ランチャー
 - `_find_bash.bat`: Git Bashの場所を自動検出する内部ファイル（直接実行しない）
+- `oracle/`: Oracle Database 23ai Free版の教材一式（詳細は [oracle/README.md](./oracle/README.md)）
