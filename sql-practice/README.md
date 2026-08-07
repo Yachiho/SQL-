@@ -6,6 +6,8 @@ Windowsでsqlite3未導入の状態から使い始める場合は [WINDOWS_SETUP
 
 SQLiteに慣れた上で次はOracleを学びたい場合は [oracle/](./oracle/) を参照してください。同じEC題材をOracle構文で用意し、SQLiteとの違いを手を動かして確認できます。
 
+`git clone`や`git pull`でエラーが出て困ったときは [GIT_GUIDE.md](./GIT_GUIDE.md) を参照してください。
+
 ## Windows: ダブルクリックで使う（アプリ版）
 
 コマンドを毎回打ちたくない場合は、`sql-practice.bat` をダブルクリックしてください。
@@ -79,3 +81,4 @@ sqlite> SELECT * FROM customers;
 - `setup.bat` / `check.bat` / `practice.bat`: `sql-practice.bat` から呼ばれる個別のWindows用ランチャー
 - `_find_bash.bat`: Git Bashの場所を自動検出する内部ファイル（直接実行しない）
 - `oracle/`: Oracle Database 23ai Free版の教材一式（詳細は [oracle/README.md](./oracle/README.md)）
+- `GIT_GUIDE.md`: Git操作でよくあるエラーの対処法・用語集
