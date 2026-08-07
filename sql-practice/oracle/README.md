@@ -3,6 +3,9 @@
 `../` (SQLite版)と同じEC題材を、Oracle 23ai Free上で動かすための手順です。
 SQLiteとの違いを手を動かして確認することが目的なので、まずは環境構築から進めます。
 
+SQLiteとの違いは [differences.md](./differences.md)（動かして確認する詳しい解説）、
+[CHEATSHEET.md](./CHEATSHEET.md)（作業中にサッと見返す早見表）にまとめています。
+
 ## 前提
 
 - Docker Desktop（または Docker Engine）がインストール済みであること
