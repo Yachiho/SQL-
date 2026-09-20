@@ -22,6 +22,7 @@ namespace VampireLike.EditorTools
         private const string EnemiesDir = "Assets/ScriptableObjects/Enemies";
         private const string WeaponsDir = "Assets/ScriptableObjects/Weapons";
         private const string UpgradesDir = "Assets/ScriptableObjects/Upgrades";
+        private const string IdolsDir = "Assets/ScriptableObjects/Idols";
         private const string SceneDir = "Assets/Scenes";
         private const string ScenePath = SceneDir + "/MainGame.unity";
 
@@ -35,8 +36,9 @@ namespace VampireLike.EditorTools
             var enemyData = CreateEnemyData(prefabs.enemyPrefab);
             var weaponData = CreateWeaponData(prefabs.projectilePrefab);
             CreateUpgradeData(weaponData);
+            var idolData = CreateIdolData();
 
-            BuildSceneHierarchy(enemyData, weaponData);
+            BuildSceneHierarchy(enemyData, weaponData, idolData);
 
             Debug.Log("VampireLike demo scene built at " + ScenePath);
         }
@@ -52,6 +54,7 @@ namespace VampireLike.EditorTools
             CreateFolderRecursive(EnemiesDir);
             CreateFolderRecursive(WeaponsDir);
             CreateFolderRecursive(UpgradesDir);
+            CreateFolderRecursive(IdolsDir);
             CreateFolderRecursive(SceneDir);
         }
 
@@ -221,7 +224,7 @@ namespace VampireLike.EditorTools
         {
             var basic = CreateAsset<EnemyData>(EnemiesDir, "BasicEnemy", data =>
             {
-                data.enemyName = "Shambler";
+                data.enemyName = "心無いアンチ"; // generic "heartless anti-fan" mob, not a specific character
                 data.prefab = enemyPrefab;
                 data.maxHealth = 10f;
                 data.moveSpeed = 2.2f;
@@ -232,7 +235,7 @@ namespace VampireLike.EditorTools
 
             var tough = CreateAsset<EnemyData>(EnemiesDir, "ToughEnemy", data =>
             {
-                data.enemyName = "Brute";
+                data.enemyName = "スキャンダル記者"; // generic "scandal reporter" mob
                 data.prefab = enemyPrefab; // swap prefab/sprite later if you want a distinct look
                 data.maxHealth = 35f;
                 data.moveSpeed = 1.5f;
@@ -253,7 +256,7 @@ namespace VampireLike.EditorTools
         {
             var bolt = CreateAsset<WeaponData>(WeaponsDir, "MagicBolt", data =>
             {
-                data.weaponName = "Magic Bolt";
+                data.weaponName = "ハイトーンボイス";
                 data.weaponType = WeaponType.Projectile;
                 data.maxLevel = 8;
                 data.baseDamage = 8f;
@@ -269,7 +272,7 @@ namespace VampireLike.EditorTools
 
             var garlic = CreateAsset<WeaponData>(WeaponsDir, "GarlicAura", data =>
             {
-                data.weaponName = "Garlic Aura";
+                data.weaponName = "スマイルオーラ";
                 data.weaponType = WeaponType.Area;
                 data.maxLevel = 6;
                 data.baseDamage = 4f;
@@ -287,24 +290,24 @@ namespace VampireLike.EditorTools
         {
             CreateAsset<UpgradeData>(UpgradesDir, "Upgrade_MagicBolt", u =>
             {
-                u.displayName = "Magic Bolt";
-                u.description = "Fires a homing bolt at the nearest enemy. Levels up if already owned.";
+                u.displayName = "ハイトーンボイス";
+                u.description = "一番近いアンチに響く高音ボイス攻撃。習得済みならレベルアップ。";
                 u.category = UpgradeCategory.Weapon;
                 u.weaponData = weapons.magicBolt;
             });
 
             CreateAsset<UpgradeData>(UpgradesDir, "Upgrade_GarlicAura", u =>
             {
-                u.displayName = "Garlic Aura";
-                u.description = "Damages all nearby enemies on a pulse. Levels up if already owned.";
+                u.displayName = "スマイルオーラ";
+                u.description = "周囲のアンチに定期的にダメージを与える笑顔のオーラ。習得済みならレベルアップ。";
                 u.category = UpgradeCategory.Weapon;
                 u.weaponData = weapons.garlicAura;
             });
 
             CreateAsset<UpgradeData>(UpgradesDir, "Upgrade_MaxHealth", u =>
             {
-                u.displayName = "Vitality";
-                u.description = "+20 max health.";
+                u.displayName = "ファンとの絆";
+                u.description = "最大HP +20。";
                 u.category = UpgradeCategory.Stat;
                 u.statType = StatType.MaxHealth;
                 u.isMultiplier = false;
@@ -313,8 +316,8 @@ namespace VampireLike.EditorTools
 
             CreateAsset<UpgradeData>(UpgradesDir, "Upgrade_MoveSpeed", u =>
             {
-                u.displayName = "Swift Boots";
-                u.description = "+0.5 move speed.";
+                u.displayName = "ダンスレッスン";
+                u.description = "移動速度 +0.5。";
                 u.category = UpgradeCategory.Stat;
                 u.statType = StatType.MoveSpeed;
                 u.isMultiplier = false;
@@ -323,8 +326,8 @@ namespace VampireLike.EditorTools
 
             CreateAsset<UpgradeData>(UpgradesDir, "Upgrade_Damage", u =>
             {
-                u.displayName = "Sharpened Edge";
-                u.description = "+15% damage.";
+                u.displayName = "ボーカルレッスン";
+                u.description = "攻撃力 +15%。";
                 u.category = UpgradeCategory.Stat;
                 u.statType = StatType.Damage;
                 u.isMultiplier = true;
@@ -333,8 +336,8 @@ namespace VampireLike.EditorTools
 
             CreateAsset<UpgradeData>(UpgradesDir, "Upgrade_Cooldown", u =>
             {
-                u.displayName = "Quick Hands";
-                u.description = "-8% weapon cooldown.";
+                u.displayName = "リズム感アップ";
+                u.description = "攻撃間隔 -8%。";
                 u.category = UpgradeCategory.Stat;
                 u.statType = StatType.CooldownReduction;
                 u.isMultiplier = true;
@@ -343,8 +346,8 @@ namespace VampireLike.EditorTools
 
             CreateAsset<UpgradeData>(UpgradesDir, "Upgrade_Area", u =>
             {
-                u.displayName = "Wider Reach";
-                u.description = "+15% area size.";
+                u.displayName = "ステージ拡張";
+                u.description = "エリア攻撃の範囲 +15%。";
                 u.category = UpgradeCategory.Stat;
                 u.statType = StatType.AreaSize;
                 u.isMultiplier = true;
@@ -353,8 +356,8 @@ namespace VampireLike.EditorTools
 
             CreateAsset<UpgradeData>(UpgradesDir, "Upgrade_PickupRadius", u =>
             {
-                u.displayName = "Magnet";
-                u.description = "+0.75 pickup radius.";
+                u.displayName = "ビジュアルレッスン";
+                u.description = "ファン（経験値）を引き寄せる範囲 +0.75。";
                 u.category = UpgradeCategory.Stat;
                 u.statType = StatType.PickupRadius;
                 u.isMultiplier = false;
@@ -363,8 +366,8 @@ namespace VampireLike.EditorTools
 
             CreateAsset<UpgradeData>(UpgradesDir, "Upgrade_Armor", u =>
             {
-                u.displayName = "Thick Skin";
-                u.description = "+1 armor (flat damage reduction).";
+                u.displayName = "メンタルケア";
+                u.description = "被ダメージ -1（固定軽減）。";
                 u.category = UpgradeCategory.Stat;
                 u.statType = StatType.Armor;
                 u.isMultiplier = false;
@@ -373,13 +376,57 @@ namespace VampireLike.EditorTools
 
             CreateAsset<UpgradeData>(UpgradesDir, "Upgrade_XpGain", u =>
             {
-                u.displayName = "Scholar";
-                u.description = "+10% experience gained.";
+                u.displayName = "メディア出演";
+                u.description = "獲得ファン（経験値） +10%。";
                 u.category = UpgradeCategory.Stat;
                 u.statType = StatType.XpGain;
                 u.isMultiplier = true;
                 u.value = 0.1f;
             });
+        }
+
+        private struct IdolDataSet
+        {
+            public IdolData defaultIdol;
+        }
+
+        /// <summary>
+        /// Original idol names (not tied to any existing franchise) so this
+        /// project has no third-party IP in it. Vocal/Dance/Visual numbers are
+        /// just gameplay flavor — tune them, add more idols via
+        /// Assets/Create/VampireLike/Idol, or swap the default on the Player's
+        /// IdolProfile component to whichever one you want to play as.
+        /// </summary>
+        private static IdolDataSet CreateIdolData()
+        {
+            var hinata = CreateAsset<IdolData>(IdolsDir, "Idol_SakurabaHinata", idol =>
+            {
+                idol.idolName = "桜庭ひなた";
+                idol.themeColor = new Color(1f, 0.75f, 0.85f);
+                idol.vocal = 40;
+                idol.dance = 75;
+                idol.visual = 55;
+            });
+
+            CreateAsset<IdolData>(IdolsDir, "Idol_TsukishiroRiko", idol =>
+            {
+                idol.idolName = "月城りこ";
+                idol.themeColor = new Color(1f, 0.55f, 0.7f);
+                idol.vocal = 45;
+                idol.dance = 50;
+                idol.visual = 80;
+            });
+
+            CreateAsset<IdolData>(IdolsDir, "Idol_ShirasagiShizuku", idol =>
+            {
+                idol.idolName = "白鷺しずく";
+                idol.themeColor = new Color(0.6f, 0.7f, 1f);
+                idol.vocal = 80;
+                idol.dance = 40;
+                idol.visual = 50;
+            });
+
+            return new IdolDataSet { defaultIdol = hinata };
         }
 
         private static T CreateAsset<T>(string dir, string name, System.Action<T> configure) where T : ScriptableObject
@@ -400,7 +447,7 @@ namespace VampireLike.EditorTools
         // Scene hierarchy
         // ---------------------------------------------------------------
 
-        private static void BuildSceneHierarchy(EnemyDataSet enemyData, WeaponDataSet weaponData)
+        private static void BuildSceneHierarchy(EnemyDataSet enemyData, WeaponDataSet weaponData, IdolDataSet idolData)
         {
             Scene scene = EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Single);
 
@@ -419,6 +466,9 @@ namespace VampireLike.EditorTools
             SetPrivateField(playerController, "spriteRenderer", playerSprite);
             playerGo.AddComponent<Player>();
             var weaponManager = playerGo.AddComponent<WeaponManager>();
+            var idolProfile = playerGo.AddComponent<IdolProfile>();
+            SetPrivateField(idolProfile, "idolData", idolData.defaultIdol);
+            SetPrivateField(idolProfile, "spriteRenderer", playerSprite);
 
             // --- Camera ---
             var cameraGo = new GameObject("Main Camera");
@@ -459,12 +509,13 @@ namespace VampireLike.EditorTools
             eventSystemGo.AddComponent<EventSystem>();
             eventSystemGo.AddComponent<StandaloneInputModule>();
 
-            BuildHud(canvasGo.transform, out var healthSlider, out var xpSlider, out var levelText, out var timerText);
+            BuildHud(canvasGo.transform, out var healthSlider, out var xpSlider, out var levelText, out var timerText, out var idolNameText);
             var hud = canvasGo.AddComponent<HUDController>();
             SetPrivateField(hud, "healthBar", healthSlider);
             SetPrivateField(hud, "xpBar", xpSlider);
             SetPrivateField(hud, "levelText", levelText);
             SetPrivateField(hud, "timerText", timerText);
+            SetPrivateField(hud, "idolNameText", idolNameText);
 
             var upgradeSystem = systemsGo.AddComponent<UpgradeSystem>();
             string[] upgradeGuids = AssetDatabase.FindAssets("t:UpgradeData");
@@ -482,7 +533,7 @@ namespace VampireLike.EditorTools
             EditorBuildSettings.scenes = new[] { new EditorBuildSettingsScene(ScenePath, true) };
         }
 
-        private static void BuildHud(Transform canvas, out Slider healthBar, out Slider xpBar, out Text levelText, out Text timerText)
+        private static void BuildHud(Transform canvas, out Slider healthBar, out Slider xpBar, out Text levelText, out Text timerText, out Text idolNameText)
         {
             var hudRoot = CreateUIObject("HUD", canvas);
             var hudRect = hudRoot.GetComponent<RectTransform>();
@@ -493,7 +544,7 @@ namespace VampireLike.EditorTools
 
             healthBar = CreateSlider(hudRoot.transform, "HealthBar", new Color(0.8f, 0.15f, 0.15f),
                 anchorMin: new Vector2(0f, 1f), anchorMax: new Vector2(0f, 1f),
-                anchoredPos: new Vector2(140f, -30f), size: new Vector2(240f, 24f));
+                anchoredPos: new Vector2(140f, -50f), size: new Vector2(240f, 24f));
 
             xpBar = CreateSlider(hudRoot.transform, "XpBar", new Color(0.2f, 0.55f, 0.9f),
                 anchorMin: new Vector2(0.5f, 1f), anchorMax: new Vector2(0.5f, 1f),
@@ -501,7 +552,11 @@ namespace VampireLike.EditorTools
 
             levelText = CreateText(hudRoot.transform, "LevelText", "Lv. 1", 24,
                 anchorMin: new Vector2(0f, 1f), anchorMax: new Vector2(0f, 1f),
-                anchoredPos: new Vector2(30f, -60f), size: new Vector2(150f, 30f), alignment: TextAnchor.MiddleLeft);
+                anchoredPos: new Vector2(30f, -80f), size: new Vector2(150f, 30f), alignment: TextAnchor.MiddleLeft);
+
+            idolNameText = CreateText(hudRoot.transform, "IdolNameText", "Idol", 22,
+                anchorMin: new Vector2(0f, 1f), anchorMax: new Vector2(0f, 1f),
+                anchoredPos: new Vector2(140f, -25f), size: new Vector2(240f, 30f), alignment: TextAnchor.MiddleCenter);
 
             timerText = CreateText(hudRoot.transform, "TimerText", "00:00", 28,
                 anchorMin: new Vector2(0.5f, 1f), anchorMax: new Vector2(0.5f, 1f),

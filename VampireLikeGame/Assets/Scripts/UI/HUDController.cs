@@ -9,12 +9,14 @@ namespace VampireLike
         [SerializeField] private Slider xpBar;
         [SerializeField] private Text levelText;
         [SerializeField] private Text timerText;
+        [SerializeField] private Text idolNameText;
 
         private void OnEnable()
         {
             PlayerHealth.OnHealthChanged += HandleHealthChanged;
             PlayerLeveling.OnXpChanged += HandleXpChanged;
             GameManager.OnTimeUpdated += HandleTimeUpdated;
+            IdolProfile.OnIdolAssigned += HandleIdolAssigned;
         }
 
         private void OnDisable()
@@ -22,6 +24,15 @@ namespace VampireLike
             PlayerHealth.OnHealthChanged -= HandleHealthChanged;
             PlayerLeveling.OnXpChanged -= HandleXpChanged;
             GameManager.OnTimeUpdated -= HandleTimeUpdated;
+            IdolProfile.OnIdolAssigned -= HandleIdolAssigned;
+        }
+
+        private void HandleIdolAssigned(IdolData idol)
+        {
+            if (idolNameText != null && idol != null)
+            {
+                idolNameText.text = idol.idolName;
+            }
         }
 
         private void HandleHealthChanged(float current, float max)
