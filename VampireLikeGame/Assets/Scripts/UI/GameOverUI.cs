@@ -26,7 +26,7 @@ namespace VampireLike
             if (survivedTimeText != null && GameManager.Instance != null)
             {
                 float t = GameManager.Instance.ElapsedTime;
-                survivedTimeText.text = $"Survived {Mathf.FloorToInt(t / 60f):00}:{Mathf.FloorToInt(t % 60f):00}";
+                survivedTimeText.text = $"力尽きた…\n生存時間 {Mathf.FloorToInt(t / 60f):00}:{Mathf.FloorToInt(t % 60f):00}";
             }
         }
 

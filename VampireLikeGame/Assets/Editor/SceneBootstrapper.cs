@@ -221,7 +221,7 @@ namespace VampireLike.EditorTools
         {
             var basic = CreateAsset<EnemyData>(EnemiesDir, "BasicEnemy", data =>
             {
-                data.enemyName = "Shambler";
+                data.enemyName = "妖精"; // fairy - the series' iconic weakest generic mob, not a named character
                 data.prefab = enemyPrefab;
                 data.maxHealth = 10f;
                 data.moveSpeed = 2.2f;
@@ -232,7 +232,7 @@ namespace VampireLike.EditorTools
 
             var tough = CreateAsset<EnemyData>(EnemiesDir, "ToughEnemy", data =>
             {
-                data.enemyName = "Brute";
+                data.enemyName = "大妖精"; // big fairy - also a generic mob type, not a named character
                 data.prefab = enemyPrefab; // swap prefab/sprite later if you want a distinct look
                 data.maxHealth = 35f;
                 data.moveSpeed = 1.5f;
@@ -253,7 +253,7 @@ namespace VampireLike.EditorTools
         {
             var bolt = CreateAsset<WeaponData>(WeaponsDir, "MagicBolt", data =>
             {
-                data.weaponName = "Magic Bolt";
+                data.weaponName = "陰陽玉";
                 data.weaponType = WeaponType.Projectile;
                 data.maxLevel = 8;
                 data.baseDamage = 8f;
@@ -269,7 +269,7 @@ namespace VampireLike.EditorTools
 
             var garlic = CreateAsset<WeaponData>(WeaponsDir, "GarlicAura", data =>
             {
-                data.weaponName = "Garlic Aura";
+                data.weaponName = "結界";
                 data.weaponType = WeaponType.Area;
                 data.maxLevel = 6;
                 data.baseDamage = 4f;
@@ -287,24 +287,24 @@ namespace VampireLike.EditorTools
         {
             CreateAsset<UpgradeData>(UpgradesDir, "Upgrade_MagicBolt", u =>
             {
-                u.displayName = "Magic Bolt";
-                u.description = "Fires a homing bolt at the nearest enemy. Levels up if already owned.";
+                u.displayName = "陰陽玉";
+                u.description = "一番近い妖怪に自動で追尾する陰陽玉を放つ。習得済みならレベルアップ。";
                 u.category = UpgradeCategory.Weapon;
                 u.weaponData = weapons.magicBolt;
             });
 
             CreateAsset<UpgradeData>(UpgradesDir, "Upgrade_GarlicAura", u =>
             {
-                u.displayName = "Garlic Aura";
-                u.description = "Damages all nearby enemies on a pulse. Levels up if already owned.";
+                u.displayName = "結界";
+                u.description = "周囲の妖怪に定期的にダメージを与える結界を展開する。習得済みならレベルアップ。";
                 u.category = UpgradeCategory.Weapon;
                 u.weaponData = weapons.garlicAura;
             });
 
             CreateAsset<UpgradeData>(UpgradesDir, "Upgrade_MaxHealth", u =>
             {
-                u.displayName = "Vitality";
-                u.description = "+20 max health.";
+                u.displayName = "気合";
+                u.description = "最大HP +20。";
                 u.category = UpgradeCategory.Stat;
                 u.statType = StatType.MaxHealth;
                 u.isMultiplier = false;
@@ -313,8 +313,8 @@ namespace VampireLike.EditorTools
 
             CreateAsset<UpgradeData>(UpgradesDir, "Upgrade_MoveSpeed", u =>
             {
-                u.displayName = "Swift Boots";
-                u.description = "+0.5 move speed.";
+                u.displayName = "神速の歩法";
+                u.description = "移動速度 +0.5。";
                 u.category = UpgradeCategory.Stat;
                 u.statType = StatType.MoveSpeed;
                 u.isMultiplier = false;
@@ -323,8 +323,8 @@ namespace VampireLike.EditorTools
 
             CreateAsset<UpgradeData>(UpgradesDir, "Upgrade_Damage", u =>
             {
-                u.displayName = "Sharpened Edge";
-                u.description = "+15% damage.";
+                u.displayName = "霊力強化";
+                u.description = "攻撃力 +15%。";
                 u.category = UpgradeCategory.Stat;
                 u.statType = StatType.Damage;
                 u.isMultiplier = true;
@@ -333,8 +333,8 @@ namespace VampireLike.EditorTools
 
             CreateAsset<UpgradeData>(UpgradesDir, "Upgrade_Cooldown", u =>
             {
-                u.displayName = "Quick Hands";
-                u.description = "-8% weapon cooldown.";
+                u.displayName = "高速詠唱";
+                u.description = "攻撃間隔 -8%。";
                 u.category = UpgradeCategory.Stat;
                 u.statType = StatType.CooldownReduction;
                 u.isMultiplier = true;
@@ -343,8 +343,8 @@ namespace VampireLike.EditorTools
 
             CreateAsset<UpgradeData>(UpgradesDir, "Upgrade_Area", u =>
             {
-                u.displayName = "Wider Reach";
-                u.description = "+15% area size.";
+                u.displayName = "結界拡大";
+                u.description = "エリア攻撃の範囲 +15%。";
                 u.category = UpgradeCategory.Stat;
                 u.statType = StatType.AreaSize;
                 u.isMultiplier = true;
@@ -353,8 +353,8 @@ namespace VampireLike.EditorTools
 
             CreateAsset<UpgradeData>(UpgradesDir, "Upgrade_PickupRadius", u =>
             {
-                u.displayName = "Magnet";
-                u.description = "+0.75 pickup radius.";
+                u.displayName = "アイテム吸引";
+                u.description = "アイテムを引き寄せる範囲 +0.75。";
                 u.category = UpgradeCategory.Stat;
                 u.statType = StatType.PickupRadius;
                 u.isMultiplier = false;
@@ -363,8 +363,8 @@ namespace VampireLike.EditorTools
 
             CreateAsset<UpgradeData>(UpgradesDir, "Upgrade_Armor", u =>
             {
-                u.displayName = "Thick Skin";
-                u.description = "+1 armor (flat damage reduction).";
+                u.displayName = "根性";
+                u.description = "被ダメージ -1（固定軽減）。";
                 u.category = UpgradeCategory.Stat;
                 u.statType = StatType.Armor;
                 u.isMultiplier = false;
@@ -373,8 +373,8 @@ namespace VampireLike.EditorTools
 
             CreateAsset<UpgradeData>(UpgradesDir, "Upgrade_XpGain", u =>
             {
-                u.displayName = "Scholar";
-                u.description = "+10% experience gained.";
+                u.displayName = "スコア稼ぎ";
+                u.description = "獲得ポイント +10%。";
                 u.category = UpgradeCategory.Stat;
                 u.statType = StatType.XpGain;
                 u.isMultiplier = true;
@@ -405,7 +405,7 @@ namespace VampireLike.EditorTools
             Scene scene = EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Single);
 
             // --- Player ---
-            var playerGo = new GameObject("Player");
+            var playerGo = new GameObject("Reimu");
             playerGo.transform.position = Vector3.zero;
             var playerSprite = playerGo.AddComponent<SpriteRenderer>();
             playerSprite.sprite = AssetDatabase.LoadAssetAtPath<Sprite>($"{SpritesDir}/PlayerSprite.png");
@@ -439,10 +439,10 @@ namespace VampireLike.EditorTools
             var spawner = systemsGo.AddComponent<EnemySpawner>();
             var waves = new List<SpawnWave>
             {
-                new SpawnWave { waveName = "Early Shamblers", startTime = 0f, enemyData = enemyData.basic, spawnInterval = 1.2f, spawnCountPerTick = 1 },
-                new SpawnWave { waveName = "More Shamblers", startTime = 30f, enemyData = enemyData.basic, spawnInterval = 0.6f, spawnCountPerTick = 2 },
-                new SpawnWave { waveName = "Brutes Arrive", startTime = 60f, enemyData = enemyData.tough, spawnInterval = 4f, spawnCountPerTick = 1 },
-                new SpawnWave { waveName = "Swarm", startTime = 120f, enemyData = enemyData.basic, spawnInterval = 0.3f, spawnCountPerTick = 3 },
+                new SpawnWave { waveName = "妖精の群れ", startTime = 0f, enemyData = enemyData.basic, spawnInterval = 1.2f, spawnCountPerTick = 1 },
+                new SpawnWave { waveName = "妖精増加", startTime = 30f, enemyData = enemyData.basic, spawnInterval = 0.6f, spawnCountPerTick = 2 },
+                new SpawnWave { waveName = "大妖精出現", startTime = 60f, enemyData = enemyData.tough, spawnInterval = 4f, spawnCountPerTick = 1 },
+                new SpawnWave { waveName = "弾幕地獄", startTime = 120f, enemyData = enemyData.basic, spawnInterval = 0.3f, spawnCountPerTick = 3 },
             };
             SetPrivateField(spawner, "waves", waves);
 
@@ -519,7 +519,7 @@ namespace VampireLike.EditorTools
             var bg = panel.AddComponent<Image>();
             bg.color = new Color(0f, 0f, 0f, 0.75f);
 
-            var title = CreateText(panel.transform, "Title", "LEVEL UP! Choose an upgrade:", 32,
+            var title = CreateText(panel.transform, "Title", "レベルアップ！ 強化するスペルを選んでください", 32,
                 anchorMin: new Vector2(0.5f, 1f), anchorMax: new Vector2(0.5f, 1f),
                 anchoredPos: new Vector2(0f, -80f), size: new Vector2(800f, 50f), alignment: TextAnchor.MiddleCenter);
 
@@ -576,7 +576,7 @@ namespace VampireLike.EditorTools
             var buttonImage = buttonGo.AddComponent<Image>();
             buttonImage.color = new Color(0.25f, 0.5f, 0.9f);
             var button = buttonGo.AddComponent<Button>();
-            CreateText(buttonGo.transform, "Label", "Choose", 20,
+            CreateText(buttonGo.transform, "Label", "選択", 20,
                 anchorMin: Vector2.zero, anchorMax: Vector2.one,
                 anchoredPos: Vector2.zero, size: Vector2.zero, alignment: TextAnchor.MiddleCenter);
 
@@ -600,7 +600,7 @@ namespace VampireLike.EditorTools
             var bg = panel.AddComponent<Image>();
             bg.color = new Color(0f, 0f, 0f, 0.85f);
 
-            var survivedText = CreateText(panel.transform, "SurvivedText", "You died.\nSurvived 00:00", 36,
+            var survivedText = CreateText(panel.transform, "SurvivedText", "力尽きた…\n生存時間 00:00", 36,
                 anchorMin: new Vector2(0.5f, 0.5f), anchorMax: new Vector2(0.5f, 0.5f),
                 anchoredPos: new Vector2(0f, 60f), size: new Vector2(600f, 120f), alignment: TextAnchor.MiddleCenter);
 
@@ -613,7 +613,7 @@ namespace VampireLike.EditorTools
             var buttonImage = buttonGo.AddComponent<Image>();
             buttonImage.color = new Color(0.25f, 0.5f, 0.9f);
             var button = buttonGo.AddComponent<Button>();
-            CreateText(buttonGo.transform, "Label", "Restart", 22,
+            CreateText(buttonGo.transform, "Label", "もう一度", 22,
                 anchorMin: Vector2.zero, anchorMax: Vector2.one,
                 anchoredPos: Vector2.zero, size: Vector2.zero, alignment: TextAnchor.MiddleCenter);
 
